@@ -1,9 +1,7 @@
-import os
 import gamerunner as gr
 import gamehandler as gh
 
 def static(prechoice=None):
-    os.system("clear")
     if prechoice is not None:
         choice = prechoice
     print("\n")
@@ -19,7 +17,6 @@ def static(prechoice=None):
         rounds = (t, roundd)
         a = int(input("Number of Digits : "))
         
-        os.system("clear")
         inpt_dict = {"ndigits" : a}
         stats = gr.general_runner(gh.regMulDig, rounds, inpt_dict, md)#multgame.regMulGameDig(number_of_rounds=rounds, digits=a)
         print("Score : ", round(stats[0]))
@@ -36,7 +33,6 @@ def static(prechoice=None):
         a = int(input("Number of Digits : "))
         b = int(input('Result accurate to how many digits? '))
         
-        os.system("clear")
         inpt_dict = {"ndigits" : a, 'out' : b}
         stats = gr.general_runner(gh.divgame, rounds, inpt_dict, md)#multgame.regMulGameDig(number_of_rounds=rounds, digits=a)
         print("Score : ", round(stats[0]))
@@ -110,7 +106,6 @@ def static(prechoice=None):
             cmplx = int(cmplx)
         if cmplx != 0:
             sq = 0
-        os.system("clear")
         inpt_dict = {"ndig" : a, 'n':n, 'ndigits':b, 'sq':sq, 'cmplx':cmplx}
         stats = gr.general_runner(gh.arithmetic_game, rounds, inpt_dict, md)#multgame.regMulGameDig(number_of_rounds=rounds, digits=a)
         print("Score : ", round(stats[0]))
@@ -126,7 +121,6 @@ def static(prechoice=None):
         rounds = (t, roundd)
         a = int(input("Number of Digits : "))
         
-        os.system("clear")
         inpt_dict = {"ndigits" : a}
         stats = gr.general_runner(gh.complex_mult_game, rounds, inpt_dict, md)#multgame.regMulGameDig(number_of_rounds=rounds, digits=a)
         print("Score : ", round(stats[0]))
@@ -142,7 +136,6 @@ def static(prechoice=None):
         rounds = (t, roundd)
         a = int(input("Number of Digits : "))
         
-        os.system("clear")
         inpt_dict = {"ndigits" : a}
         stats = gr.general_runner(gh.trachtenberg, rounds, inpt_dict, md)#multgame.regMulGameDig(number_of_rounds=rounds, digits=a)
         print("Score : ", round(stats[0]))
