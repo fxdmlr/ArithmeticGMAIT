@@ -6,7 +6,29 @@ def static(prechoice=None):
         choice = prechoice
     print("\n")
     if prechoice is None:
-        choice = int(input("Enter the desired mode :\n1-RegDig\n2-Div\n3-FuncEval\n4-rootGameInteger\n5-ArithmeticGame\n6-complexMultGame\n7-TrachtenbergGame\n8-rootGame\n"))
+        choice = input("Enter the desired mode :\n1-RegDig\n2-Div\n3-FuncEval\n4-rootGameInteger\n5-ArithmeticGame\n6-complexMultGame\n7-TrachtenbergGame\n8-rootGame\n")
+    
+    try:
+        choice = int(choice)
+    except:
+        if choice == 'r':
+            inpt_dict = {"ndigits" : 5, 'mode' : 0}
+            stats = gr.general_runner(gh.regMulDig, (0, 20), inpt_dict, 1)#multgame.regMulGameDig(number_of_rounds=rounds, digits=a)
+            print("Score : ", round(stats[0]))
+            print("Total time spent : ", round(stats[1]))
+            print("Time spent per item : ", round(stats[2]))
+        elif choice == 't':
+            inpt_dict = {"ndigits" : 4, 'mode' : 0}
+            stats = gr.general_runner(gh.regMulDig, (0, 20), inpt_dict, 1)#multgame.regMulGameDig(number_of_rounds=rounds, digits=a)
+            print("Score : ", round(stats[0]))
+            print("Total time spent : ", round(stats[1]))
+            print("Time spent per item : ", round(stats[2]))
+        elif choice == 'y':
+            inpt_dict = {"ndigits" : 7, 'mode' : 0}
+            stats = gr.general_runner(gh.regMulDig, (0, 20), inpt_dict, 1)#multgame.regMulGameDig(number_of_rounds=rounds, digits=a)
+            print("Score : ", round(stats[0]))
+            print("Total time spent : ", round(stats[1]))
+            print("Time spent per item : ", round(stats[2]))
 
     if choice == 1:
         md = int(input("Mode :\n 1-Static\n 2-Dynamic\n"))
