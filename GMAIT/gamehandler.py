@@ -12,11 +12,15 @@ The output of each function is as follows :
 
 def regMulDig(inpt_dict):
     digits = inpt_dict["ndigits"]
+    mode = inpt_dict['mode']
     n1 = random.randint(10 ** (digits - 1), 10 ** (digits) - 1) 
     n2 = random.randint(10 ** (digits - 1), 10 ** (digits) - 1) 
     n1s = ' '.join([i for i in str(n1)])
     n2s = ' '.join([i for i in str(n2)])
-    string = "  %s\n* %s\n"%(n1s, n2s) + ''.join(['-' for i in range(max(len(n1s), len(n2s)) + 2)]) + '\n'
+    if mode : 
+        string = "  %s\n* %s\n"%(n1s, n2s) + ''.join(['-' for i in range(max(len(n1s), len(n2s)) + 2)]) + '\n'
+    else:
+        string = '%d * %d = ' % (n1, n2)
     return [string, n1 * n2, lambda x : int(x)]
 
 def rootgame(inpt_dict):
