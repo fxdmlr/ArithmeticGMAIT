@@ -9,8 +9,10 @@ def static_runner(function, rounds, inpt_dict):
     for i in range(number_of_rounds):
         string, res, conv_method = function(inpt_dict)
         st = time.time()
-
-        entry = conv_method(input("%s"%string))
+        nn = input("%s"%string)
+        if nn == 'r':
+            return static_runner(function, rounds, inpt_dict)
+        entry = conv_method(nn)
         en = time.time()
         if entry == res:
             print("Correct.")
@@ -35,7 +37,10 @@ def dynamic_runner(function, time_tuple, inpt_dict):
         print(string)
         time.sleep(time_per)
         os.system("clear")
-        entry = conv_function(input("> "))
+        nn = input("%s"%string)
+        if nn == 'r':
+            return static_runner(function, rounds, inpt_dict)
+        entry = conv_function(nn)
         end = time.time()
         
         if entry == res:
