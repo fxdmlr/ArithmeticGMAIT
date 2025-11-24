@@ -129,6 +129,61 @@ def arithmetic_elems(ndig, n, cmplx=False, sq=True):
 
     return curr_str, evl.evalBcmplx(evl.ins_star(res_str))
 
+def phasor_elems(ndig, n, sq=True):
+    result = random.randint(0, 10) + random.random()
+    result = int(result * 10 ** ndig) / (10 ** ndig)
+    curr_str = str(result)
+    res_str = str(result)
+    MAX = 5 if sq else 4
+    c = 0
+    for i in range(n):
+        op = random.randint(1, MAX)
+        while op == 4 and c > 0:
+            op = random.randint(1, MAX)
+        n2 = random.randint(0, 10) + random.random()
+        n2 = int(n2 * 10 ** ndig) / (10 ** ndig)
+        num_str = str(n2)
+        m2 = random.randint(0, 90)
+        phase_str = str(m2)
+        n2 *= cmath.exp(complex(0, m2 * cmath.pi/180))
+            
+        while n2 == 0:
+            n2 = random.randint(0, 10) + random.random()
+            n2 = int(n2 * 10 ** ndig) / (10 ** ndig)
+            num_str = str(n2)
+            m2 = random.randint(0, 90)
+            phase_str = str(m2)
+            n2 *= cmath.exp(complex(0, m2 * cmath.pi/180))
+        
+        n2_str = num_str + "∠" + phase_str + "°"
+        if op == 1: # +
+            curr_str = (curr_str[:] + " + " + n2_str)[:]
+            res_str = (res_str[:] + "+" + str(n2))[:]
+            result += n2
+        
+        elif op == 2: # -
+            curr_str = (curr_str[:] + " - " + n2_str)[:]
+            res_str = (res_str[:] + "-" + str(n2))[:]
+            result -= n2
+        
+        elif op == 3: # *
+            curr_str = ( curr_str[:] + " * " + n2_str)[:]
+            res_str = (res_str[:] + "*" + str(n2))[:]
+            result *= n2
+        
+        elif op == 4: # /
+            l = max(len(curr_str), len(n2_str))
+            k = min(len(curr_str), len(n2_str))
+            curr_str = curr_str + "\n" + "".join(['-' for j in range(l)]) + "\n"+ "".join([" " for j in range(int((abs(l - k)) / 2)-1)]) + n2_str
+            res_str = ("(" + res_str[:] + ")" + "/" + "(" +str(n2))[:]
+            c += 1
+        
+        
+        
+    for i in range(c):
+        res_str = res_str + ")"
+
+    return curr_str, evl.evalBcmplx(evl.ins_star(res_str))
 
 
 def funcEval(inpt_dict):
@@ -177,3 +232,15 @@ def trachtenberg(inpt_dict):
     n2s = ' '.join([i for i in str(n2)])
     string = "  %s\n* %s\n"%(n1s, n2s) + ''.join(['-' for i in range(max(len(n1s), len(n2s)) + 2)]) + '\n'
     return [string, str(n1 * n2)[::-1], lambda x : x]
+
+def phasor_game(inpt_dict):
+    numdigs = inpt_dict['ndig']
+    n = inpt_dict['n']
+    ndigits = inpt_dict['ndigits']
+    
+    a, b = phasor_elems(numdigs, n)
+    if not isinstance(b, complex):
+        bres = int(b * 10**ndigits) / (10**ndigits)
+    else:
+        bres = complex(int(b.real * 10**ndigits) / (10**ndigits), int(b.imag * 10**ndigits) / (10**ndigits))
+    return a + "\n > ", bres, lambda x : complex(x)

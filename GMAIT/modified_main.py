@@ -6,26 +6,34 @@ def static(prechoice=None):
         choice = prechoice
     print("\n")
     if prechoice is None:
-        choice = input("Enter the desired mode :\n1-RegDig\n2-Div\n3-FuncEval\n4-rootGameInteger\n5-ArithmeticGame\n6-complexMultGame\n7-TrachtenbergGame\n8-rootGame\n")
+        choice = input("Enter the desired mode :\n1-RegDig\n2-Div\n3-FuncEval\n4-rootGameInteger\n5-ArithmeticGame\n6-complexMultGame\n7-TrachtenbergGame\n8-rootGame\n9-phasorGame\n")
     
     try:
         choice = int(choice)
     except:
-        if choice == 'r':
+        if choice == 'a':
             inpt_dict = {"ndigits" : 5, 'mode' : 0}
             stats = gr.general_runner(gh.regMulDig, (0, 20), inpt_dict, 1)#multgame.regMulGameDig(number_of_rounds=rounds, digits=a)
             print("Score : ", round(stats[0]))
             print("Total time spent : ", round(stats[1]))
             print("Time spent per item : ", round(stats[2]))
-        elif choice == 't':
+        elif choice == 'q':
             inpt_dict = {"ndigits" : 4, 'mode' : 0}
             stats = gr.general_runner(gh.regMulDig, (0, 20), inpt_dict, 1)#multgame.regMulGameDig(number_of_rounds=rounds, digits=a)
             print("Score : ", round(stats[0]))
             print("Total time spent : ", round(stats[1]))
             print("Time spent per item : ", round(stats[2]))
-        elif choice == 'y':
+        elif choice == 'z':
             inpt_dict = {"ndigits" : 7, 'mode' : 0}
             stats = gr.general_runner(gh.regMulDig, (0, 20), inpt_dict, 1)#multgame.regMulGameDig(number_of_rounds=rounds, digits=a)
+            print("Score : ", round(stats[0]))
+            print("Total time spent : ", round(stats[1]))
+            print("Time spent per item : ", round(stats[2]))
+        
+        elif choice == 's':
+            inpt_dict = {"ndig" : 3, 'n':3, 'ndigits':2}
+            print('Evaluate the result to two digits after floating point.')
+            stats = gr.general_runner(gh.phasor_game, (0, 10), inpt_dict, 1)#multgame.regMulGameDig(number_of_rounds=rounds, digits=a)
             print("Score : ", round(stats[0]))
             print("Total time spent : ", round(stats[1]))
             print("Time spent per item : ", round(stats[2]))
@@ -187,6 +195,32 @@ def static(prechoice=None):
         
         inpt_dict = {"ndigits" : a, 'resdig' : b, 'n':c}
         stats = gr.general_runner(gh.rootgame, rounds, inpt_dict, md)#multgame.regMulGameDig(number_of_rounds=rounds, digits=a)
+        print("Score : ", round(stats[0]))
+        print("Total time spent : ", round(stats[1]))
+        print("Time spent per item : ", round(stats[2]))
+    
+    if choice == 9:
+        md = int(input("Mode :\n 1-Static\n 2-Dynamic\n"))
+        roundd = int(input("Number of rounds : ")) 
+        t = 0
+        if md == 2:
+            t = int(input("Duration : "))
+        rounds = (t, roundd)
+        a = int(input("Number of Digits after floating point : "))
+        n = input('Number of operations (DEFAULT 3): ')
+        if n == "":
+            n = 3
+        else:
+            n = int(n)
+            
+        b = input('Accurate to how many digits? (DEFAULT 2) ')
+        if b == "":
+            b = 2
+        else:
+            b = int(b)
+        
+        inpt_dict = {"ndig" : a, 'n':n, 'ndigits':b}
+        stats = gr.general_runner(gh.phasor_game, rounds, inpt_dict, md)#multgame.regMulGameDig(number_of_rounds=rounds, digits=a)
         print("Score : ", round(stats[0]))
         print("Total time spent : ", round(stats[1]))
         print("Time spent per item : ", round(stats[2]))
