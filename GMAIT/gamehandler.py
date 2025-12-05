@@ -17,10 +17,13 @@ def regMulDig(inpt_dict):
     n2 = random.randint(10 ** (digits - 1), 10 ** (digits) - 1) 
     n1s = ' '.join([i for i in str(n1)])
     n2s = ' '.join([i for i in str(n2)])
-    if mode : 
+    if mode == 1: 
         string = "  %s\n* %s\n"%(n1s, n2s) + ''.join(['-' for i in range(max(len(n1s), len(n2s)) + 2)]) + '\n'
+    elif mode == 0:
+        string = ' %d * %d = ' % (n1, n2)
     else:
-        string = '%d * %d = ' % (n1, n2)
+        string = " %s * %s = "%(n1s, n2s) 
+        
     return [string, n1 * n2, lambda x : int(x)]
 
 def rootgame(inpt_dict):

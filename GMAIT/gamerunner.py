@@ -1,8 +1,10 @@
 import time
 import gamehandler as gh
-import os
 
+def cls(n=100):
+    print(''.join(['\n' for i in range(n)]))
 def static_runner(function, rounds, inpt_dict):
+    cls()
     null, number_of_rounds = rounds
     start = time.time()
     pts = 0
@@ -27,6 +29,7 @@ def static_runner(function, rounds, inpt_dict):
     return [pts / number_of_rounds * 100, end - start, (end - start) / number_of_rounds]
 
 def dynamic_runner(function, time_tuple, inpt_dict):
+    cls
     time_per, rounds = time_tuple
     pts = 0
     number_of_rounds = 0
@@ -36,7 +39,7 @@ def dynamic_runner(function, time_tuple, inpt_dict):
         start = time.time()
         print(string)
         time.sleep(time_per)
-        os.system("clear")
+
         nn = input("%s"%string)
         if nn == 'r':
             return static_runner(function, rounds, inpt_dict)
